@@ -1,0 +1,36 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.chartbeat.com/cbp/api/real-time-apis/getting-started-with-our-real-time-api
+docs: https://help.chartbeat.com/hc/en-us/articles/360036657754-Create-and-manage-API-keys
+summary:
+  types: [apiKey]
+  api_key_in: [header, query]
+schemes:
+  - name: X-CB-AK
+    type: apiKey
+    in: header
+    parameter: X-CB-AK
+    description: >-
+      Chartbeat API key passed in the HTTP request header as 'X-CB-AK'. The key
+      is generated and managed in Chartbeat account settings. This is the
+      current documented authentication method for the Real-Time, Historical
+      (Advanced Queries), Headline Testing, Conversion, and Data Lab APIs.
+    applies_to:
+      - Real-Time API (https://api.chartbeat.com/live/)
+      - Historical / Advanced Queries API (https://api.chartbeat.com/query/v2/)
+      - Headline Testing API
+      - Conversion API
+      - Data Lab API
+  - name: apikey
+    type: apiKey
+    in: query
+    parameter: apikey
+    description: >-
+      Legacy API-key delivery as an 'apikey' query-string parameter, still shown
+      in older Help Center examples for the Advanced Queries API. Header-based
+      X-CB-AK is the preferred/current method.
+notes:
+  - No OAuth2 / OpenID Connect surface is documented; there is no scope model.
+  - API keys are account-scoped and gate access per site/host and per plan tier
+    (Advanced Queries and some feature APIs are Premium add-ons).
+  - API usage is governed by Chartbeat's API terms (https://chartbeat.com/apiterms/).
