@@ -1,0 +1,47 @@
+generated: '2026-07-18'
+method: searched
+source: docs.chartbeat.com mobile SDK docs + npm/CocoaPods/JitPack registries
+note: >-
+  Chartbeat's first-party client libraries are its mobile/analytics tracking
+  SDKs (client-side data collection), not REST API client libraries. Chartbeat
+  publishes no official server-side SDK for the Real-Time / Historical / Headline
+  Testing / Conversion / Data Lab REST APIs (those are plain HTTPS + X-CB-AK).
+packages:
+  - language: swift
+    registry: cocoapods
+    name: Chartbeat
+    version: 1.5.8
+    url: https://cocoapods.org/pods/Chartbeat
+    install: "pod 'Chartbeat'"
+    kind: mobile-tracking-sdk
+    platform: iOS
+    official: true
+  - language: java
+    registry: jitpack
+    name: com.github.chartbeat:android_sdk
+    version: 1.8.0
+    url: https://jitpack.io/#chartbeat/android_sdk
+    install: "implementation 'com.github.chartbeat:android_sdk:1.8.0'"
+    kind: mobile-tracking-sdk
+    platform: Android
+    docs: https://docs.chartbeat.com/cbp/tracking/mobile-app-sdks/android-sdk
+    official: true
+  - language: javascript
+    registry: npm
+    name: chartbeat-react-native-sdk
+    version: 0.0.22
+    url: https://www.npmjs.com/package/chartbeat-react-native-sdk
+    install: npm install chartbeat-react-native-sdk
+    kind: mobile-tracking-sdk
+    platform: React Native
+    docs: https://docs.chartbeat.com/cbp/tracking/mobile-app-sdks/react-native-sdk
+    official: true
+  - language: javascript
+    registry: npm
+    name: chartbeat-react-native-bridge-sdk
+    version: 1.0.6
+    url: https://www.npmjs.com/package/chartbeat-react-native-bridge-sdk
+    install: npm install chartbeat-react-native-bridge-sdk
+    kind: mobile-tracking-sdk
+    platform: React Native
+    official: true

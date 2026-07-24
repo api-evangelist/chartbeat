@@ -1,0 +1,53 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.chartbeat.com/cbp/api
+docs: https://help.chartbeat.com/hc/en-us/articles/360045337214-Guide-to-Chartbeat-APIs
+transport:
+  protocol: HTTPS
+  base_hosts:
+    - https://api.chartbeat.com/live/        # Real-Time API
+    - https://api.chartbeat.com/query/v2/    # Historical / Advanced Queries API
+  methods: [GET, POST]
+  formats: [application/json, text/csv]
+authentication:
+  style: api-key-header
+  header: X-CB-AK
+  ref: authentication/chartbeat-authentication.yml
+required_parameters:
+  - name: host
+    description: >-
+      The site identifier (dashboard host). Video endpoints prepend 'video@'
+      (e.g. video@mysite.com).
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key header or documented idempotent-write contract. Read
+    (Real-Time) endpoints are naturally idempotent GETs; the Historical API uses
+    an asynchronous submit/status/results job model rather than idempotency keys.
+pagination:
+  style: row-limit
+  params: [limit]
+  note: >-
+    Historical / Advanced Queries results are bounded with a limit= parameter
+    (recommended <= 10,000 rows). Real-Time endpoints use a limit= cap on
+    returned rows rather than cursor/offset paging.
+async_jobs:
+  applies_to: Historical / Advanced Queries API
+  pattern: submit -> poll status -> fetch results
+  note: >-
+    One-time queries expose three endpoints (submit a query, check run status,
+    fetch completed results). Recurring queries expose six endpoints (submit,
+    status, fetch, plus management) that auto-generate reports on a schedule.
+rate_limiting:
+  ref: rate-limits/chartbeat-rate-limits.yml
+  limit: 200 requests/minute/host
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining]
+  caching: Real-Time responses cached ~3 seconds
+error_envelope:
+  note: >-
+    Errors are returned as standard HTTP status codes (e.g. 401 for a bad/missing
+    X-CB-AK key, 429 when the per-minute limit is exceeded). No RFC 9457
+    problem+json envelope is documented.
+versioning:
+  ref: lifecycle/chartbeat-lifecycle.yml
+  style: uri-path

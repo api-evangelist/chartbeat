@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.chartbeat.com/cbp/api/real-time-apis/getting-started-with-our-real-time-api
+docs: https://help.chartbeat.com/hc/en-us/articles/360045337214-Guide-to-Chartbeat-APIs
+scheme: fixed-window
+rate_limits:
+  - scope: per host (site) per API key
+    limit_count: 200
+    window: 1m
+    description: >-
+      200 requests per minute per host. Real-Time API data is cached and only
+      updated every 3 seconds, so polling more frequently than every 3 seconds
+      returns identical data and wastes quota.
+signaling:
+  headers:
+    - name: X-RateLimit-Limit
+      description: The request ceiling for the current window.
+    - name: X-RateLimit-Remaining
+      description: Requests remaining in the current window.
+  over_limit_status: 429
+notes:
+  - Real-Time API query results are cached for 3 seconds; align polling to that
+    cadence.
+  - Historical (Advanced Queries) results recommend no more than 10,000 rows per
+    query via the limit= parameter.

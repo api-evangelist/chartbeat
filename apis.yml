@@ -1,8 +1,16 @@
 aid: chartbeat
 name: Chartbeat
-description: 'Chartbeat is a company surfaced as a portfolio company of threshold-ventures, uncork-capital
-  and added to the API Evangelist network as a stub for enrichment. Sector: saas. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  Chartbeat is a real-time content analytics and audience-engagement platform
+  built for digital publishers, media brands, and editorial teams. It measures
+  how audiences read, watch, and engage with content the moment it is published,
+  reporting live traffic, engaged time, loyalty, video engagement, and headline
+  performance. Beyond its dashboards, Chartbeat exposes public HTTP APIs: a
+  Real-Time API for live traffic and video data updated every three seconds, a
+  Historical (Advanced Queries) API for summary traffic reporting, and Headline
+  Testing, Conversion, and Data Lab APIs, plus JavaScript, iOS, Android, and
+  React Native tracking SDKs for data collection. Authentication is via an
+  account API key sent in the X-CB-AK header.
 url: https://raw.githubusercontent.com/api-evangelist/chartbeat/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,13 +19,104 @@ x-backed-by:
 - uncork-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: https://chartbeat.com/wp-content/uploads/2024/04/Chartbeat-logo-Navy-300ppi@2x.png
 tags:
 - Company
-- Saas
-apis: []
+- SaaS
+- Analytics
+- Content Analytics
+- Real-Time Analytics
+- Audience Engagement
+- Publishing
+- Media
+- Web Analytics
+- Video Analytics
+apis:
+- name: Chartbeat Real-Time API
+  description: >-
+    Live audience and traffic data updated every three seconds — top pages,
+    referrers, geographies, engaged time, loyalty, and live concurrent visitors
+    — the data behind the Real-Time Dashboard. HTTP GET, JSON responses.
+  humanURL: https://docs.chartbeat.com/cbp/api/real-time-apis
+  baseURL: https://api.chartbeat.com/live/
+  tags:
+  - Real-Time
+  - Traffic
+  - Audience
+  properties:
+  - type: Documentation
+    url: https://docs.chartbeat.com/cbp/api/real-time-apis
+  - type: GettingStarted
+    url: https://docs.chartbeat.com/cbp/api/real-time-apis/getting-started-with-our-real-time-api
+- name: Chartbeat Historical API (Advanced Queries)
+  description: >-
+    Summary historical traffic data for a site over custom date ranges, via an
+    asynchronous submit / status / results job model. Supports one-time and
+    recurring queries with configurable metrics, dimensions, and filters,
+    downloadable as JSON or CSV. Premium feature.
+  humanURL: https://docs.chartbeat.com/cbp/api/historical-api
+  baseURL: https://api.chartbeat.com/query/v2/
+  tags:
+  - Historical
+  - Advanced Queries
+  - Reporting
+  properties:
+  - type: Documentation
+    url: https://docs.chartbeat.com/cbp/api/historical-api
+  - type: GettingStarted
+    url: https://docs.chartbeat.com/cbp/api/historical-api/getting-started-with-our-historical-api
+- name: Chartbeat Headline Testing API
+  description: >-
+    Programmatic access to headline testing data — raw variant-level data,
+    summary reports, and variant reports for headline tests run over a custom
+    time range.
+  humanURL: https://docs.chartbeat.com/cbp/api/headline-testing-api
+  baseURL: https://api.chartbeat.com/
+  tags:
+  - Headline Testing
+  - Optimization
+  properties:
+  - type: Documentation
+    url: https://docs.chartbeat.com/cbp/api/headline-testing-api
+- name: Chartbeat Conversion API
+  description: >-
+    Retrieve the top articles that drove a given conversion event for a
+    specified host and date range, with counts attributed per path.
+  humanURL: https://docs.chartbeat.com/cbp/api/conversion-api
+  baseURL: https://api.chartbeat.com/
+  tags:
+  - Conversion
+  - Attribution
+  properties:
+  - type: Documentation
+    url: https://docs.chartbeat.com/cbp/api/conversion-api
+- name: Chartbeat Data Lab API
+  description: >-
+    Programmatic access to Chartbeat Data Lab datasets for deeper custom
+    analysis of audience and content performance.
+  humanURL: https://docs.chartbeat.com/cbp/api/data-lab-api
+  baseURL: https://api.chartbeat.com/
+  tags:
+  - Data Lab
+  - Datasets
+  properties:
+  - type: Documentation
+    url: https://docs.chartbeat.com/cbp/api/data-lab-api
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -26,3 +125,52 @@ maintainers:
 common:
 - type: Website
   url: https://chartbeat.com/
+- type: DeveloperPortal
+  url: https://docs.chartbeat.com/cbp
+- type: Documentation
+  url: https://docs.chartbeat.com/cbp
+- type: APIReference
+  url: https://docs.chartbeat.com/cbp/api
+- type: GettingStarted
+  url: https://docs.chartbeat.com/cbp/api/real-time-apis/getting-started-with-our-real-time-api
+- type: APIExplorer
+  url: https://chartbeat.com/docs/api/explore/
+- type: Support
+  url: https://help.chartbeat.com/
+- type: Blog
+  url: https://blog.chartbeat.com/
+- type: StatusPage
+  url: https://status.chartbeat.com/
+- type: GitHubOrganization
+  url: https://github.com/chartbeat-labs
+- type: Pricing
+  url: https://chartbeat.com/product/chartbeat-pricing/
+- type: SignUp
+  url: https://chartbeat.com/signin/
+- type: TermsOfService
+  url: https://chartbeat.com/terms/
+- type: PrivacyPolicy
+  url: https://chartbeat.com/privacy/
+- type: LLMsTxt
+  url: https://docs.chartbeat.com/llms.txt
+- type: Authentication
+  url: authentication/chartbeat-authentication.yml
+- type: RateLimits
+  url: rate-limits/chartbeat-rate-limits.yml
+- type: Conventions
+  url: conventions/chartbeat-conventions.yml
+- type: Lifecycle
+  url: lifecycle/chartbeat-lifecycle.yml
+- type: Packages
+  url: packages/chartbeat-packages.yml
+- type: SDKs
+  url: packages/chartbeat-packages.yml
+- type: DomainSecurity
+  url: security/chartbeat-domain-security.yml
+- type: WellKnown
+  url: well-known/chartbeat-well-known.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

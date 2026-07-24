@@ -1,0 +1,23 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.chartbeat.com/cbp/api
+versioning:
+  scheme: uri-path
+  current: v2
+  detail: >-
+    API versions are carried in the URL path. The Real-Time traffic endpoints
+    use a per-endpoint version segment (e.g. toppages/v3/), and the Historical /
+    Advanced Queries API is served under /query/v2/.
+  docs: https://docs.chartbeat.com/cbp/api
+status_page: https://status.chartbeat.com/
+support: https://help.chartbeat.com/
+terms: https://chartbeat.com/apiterms/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No formal, published deprecation/sunset policy or RFC 8594 Sunset/Deprecation
+    header support was found in the developer documentation.
+sla:
+  url: null
+  note: No published API SLA/uptime commitment located; status.chartbeat.com is the operational transparency surface.
