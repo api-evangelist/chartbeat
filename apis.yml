@@ -33,7 +33,7 @@ accessModel:
   method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-08-13'
 image: https://chartbeat.com/wp-content/uploads/2024/04/Chartbeat-logo-Navy-300ppi@2x.png
 tags:
 - Company
@@ -86,7 +86,7 @@ apis:
     summary reports, and variant reports for headline tests run over a custom
     time range.
   humanURL: https://docs.chartbeat.com/cbp/api/headline-testing-api
-  baseURL: https://api.chartbeat.com/
+  baseURL: https://api.chartbeat.com/mab/htapi/v1/
   tags:
   - Headline Testing
   - Optimization
@@ -98,7 +98,7 @@ apis:
     Retrieve the top articles that drove a given conversion event for a
     specified host and date range, with counts attributed per path.
   humanURL: https://docs.chartbeat.com/cbp/api/conversion-api
-  baseURL: https://api.chartbeat.com/
+  baseURL: https://api.chartbeat.com/milkyway_dashboard/v1/
   tags:
   - Conversion
   - Attribution
@@ -110,7 +110,7 @@ apis:
     Programmatic access to Chartbeat Data Lab datasets for deeper custom
     analysis of audience and content performance.
   humanURL: https://docs.chartbeat.com/cbp/api/data-lab-api
-  baseURL: https://api.chartbeat.com/
+  baseURL: https://dashapi.chartbeat.com/datalab_api/
   tags:
   - Data Lab
   - Datasets
@@ -167,10 +167,29 @@ common:
   url: packages/chartbeat-packages.yml
 - type: DomainSecurity
   url: security/chartbeat-domain-security.yml
-- type: WellKnown
-  url: well-known/chartbeat-well-known.yml
+- type: TrustCenter
+  url: https://trust.chartbeat.com/
+- type: Plans
+  url: plans/chartbeat-plans-pricing.yml
+- type: Sandbox
+  url: sandbox/chartbeat-sandbox.yml
+- type: Conformance
+  url: conformance/chartbeat-conformance.yml
+- type: DataModel
+  url: data-model/chartbeat-data-model.yml
+- type: Components
+  url: components/chartbeat-components.yml
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 7
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Round 2. Contract discovery re-run against every host — no OpenAPI, GraphQL,
+    AsyncAPI, MCP server or A2A agent card exists. WellKnown pointer REMOVED: the
+    probe records 404/503/307 on every path, so the pointer was asserting a
+    surface Chartbeat does not serve. Added plans, sandbox (hosted API Explorer),
+    trust center, conformance, data model, components and an MCP candidate;
+    upgraded packages with structured version/published currency and well-known
+    with a dated re-probe. Corrected three baseURLs from the generic
+    api.chartbeat.com root to the documented bases.
