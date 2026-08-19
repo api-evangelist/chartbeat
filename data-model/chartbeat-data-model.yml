@@ -1,0 +1,206 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.chartbeat.com/cbp/api/real-time-apis/traffic-data,
+  https://docs.chartbeat.com/cbp/api/real-time-apis/video-engagement-data,
+  https://docs.chartbeat.com/cbp/api/historical-api/metrics-dimensions-filters,
+  https://docs.chartbeat.com/cbp/api/data-lab-api/getting-started-with-data-lab-api,
+  https://docs.chartbeat.com/cbp/api/headline-testing-api/raw-data,
+  https://docs.chartbeat.com/cbp/api/conversion-api/top-articles
+note: >-
+  Chartbeat publishes no OpenAPI, so this graph is read from the documented
+  response objects and the published metric/dimension/column registries rather
+  than derived from schema $refs. Every field name below appears verbatim in the
+  docs cited above.
+identity:
+  root_key: host
+  description: >-
+    Everything in the Chartbeat data model hangs off `host` — the Site ID, which
+    is the value of the `_sf_async_config.domain` variable in the tracking tag
+    and is normally the site's root domain. Video surfaces address the same site
+    with a `video@` prefix (e.g. video@mysite.com). There is no numeric account
+    or resource ID in the public API; `host` plus the API key IS the addressing
+    scheme.
+entities:
+  - name: Site
+    key: host
+    description: A tracked property (dashboard). The tenant boundary of every API call.
+    fields: [host, subdomain, site_experience]
+  - name: Page
+    key: path
+    description: >-
+      A tracked URL on a Site. The central object of the Real-Time and Historical
+      surfaces.
+    fields: [path, page_path, internal_path, title, host, authors, sections, pagetype, page_type, contenttype, content_type, publish_date, sponsor]
+  - name: PageStats
+    key: null
+    description: >-
+      The real-time statistics block attached to a Page in the Top Pages
+      response. Histogram members share a common shape.
+    fields: [people, read, visits, engaged_time, engaged_visit, writing_visit, domload, scroll, visit, performance_score, subscr, platform, platform_engaged, article, toprefs, recirc, crowd, write, num_refs, idle, direct, links, search, internal, social, new]
+  - name: Histogram
+    key: null
+    description: >-
+      Repeating value object used for engaged_time, engaged_visit, domload,
+      scroll, visit, writing_visit, page_load_hist, pagewidth_hist, time_hist and
+      scroll_hist.
+    fields: [breaks, num_values, median, hist, avg, sum]
+  - name: Referrer
+    key: domain
+    description: A traffic source attributed to a Page or Site.
+    fields: [domain, visitors, referrer, canonical_referrer, referrer_type]
+  - name: Geo
+    key: null
+    description: Geographic breakdown of live concurrents.
+    fields: [country, region, city]
+  - name: Visitor
+    key: null
+    description: >-
+      Chartbeat exposes no per-person object. Visitors appear only as aggregate
+      classifications.
+    fields: [loyalty_type, visit_frequency, subscriber, subscriber_type, device, os, browser, platform, pinger_source, distribution]
+  - name: Author
+    key: author
+    description: Byline attributed to a Page; a Top Pages filter dimension.
+    fields: [author]
+  - name: Section
+    key: section
+    description: Editorial section attributed to a Page; a Top Pages filter dimension.
+    fields: [section]
+  - name: Video
+    key: video_path
+    description: A tracked video asset on a Site (Video Engagement add-on).
+    fields: [video_path, video_title, play_state, video_plays, video_loads, video_play_rate, video_avg_time]
+  - name: Query
+    key: query_id
+    description: >-
+      An Advanced Queries (Historical API) job. The only stateful, addressable
+      resource in the public API.
+    fields: [query_id, status, endpoint, host, start, end, tz, limit, sort_column, sort_order, metrics, dimensions, filters]
+    states: [submitted, running, completed, downloaded, deleted]
+  - name: RecurringQuery
+    key: query_id
+    description: >-
+      A Query template that regenerates on a day/week/month cadence, with its own
+      runs, fetch and cancel operations.
+    fields: [query_id, date_range, status]
+  - name: Experiment
+    key: null
+    description: A headline/image test (Headline Testing API).
+    fields: [host, start, end, tz, status]
+  - name: Variant
+    key: null
+    description: One headline/image variant inside an Experiment.
+    fields: []
+  - name: ConversionEvent
+    key: event_type
+    description: >-
+      A conversion event type (e.g. paywall_complete) with article attribution.
+    fields: [event_type, sort_event_type, host, start, end, tz, limit]
+  - name: CustomMetric
+    key: key
+    description: >-
+      A customer-defined metric reported through the _cbq tracking object and
+      returned only by the Top Pages endpoint. Created by Chartbeat support, not
+      via API.
+    fields: [label, key, type]
+    types: [Number, String, Enum]
+  - name: DataLabRow
+    key: null
+    description: >-
+      A flat hourly-binned fact row from the Data Lab API, projected by the
+      requested `columns` list; delivered gzipped as CSV or JSON.
+    fields: [ts_bin, host, subdomain, path, internal_path, page_type, content_type, page_views, engaged_page_views, engaged_time, page_views_loyal, page_views_quality, page_avg_scroll, page_scroll_starts, scroll_hist, scrolled_page_views, total_scroll, browser, os, device, country, region, referrer, referrer_type, loyalty_type, subscriber_type, site_experience, pinger_source, visit_frequency, utm_source, utm_medium, utm_campaign, utm_content, utm_term]
+relationships:
+  - from: Site
+    to: Page
+    kind: has_many
+    via: host
+  - from: Page
+    to: PageStats
+    kind: has_one
+    via: stats
+  - from: PageStats
+    to: Histogram
+    kind: has_many
+    via: engaged_time,engaged_visit,domload,scroll,visit,writing_visit
+  - from: PageStats
+    to: Referrer
+    kind: has_many
+    via: toprefs
+  - from: Page
+    to: Author
+    kind: has_many
+    via: authors
+  - from: Page
+    to: Section
+    kind: has_many
+    via: sections
+  - from: Site
+    to: Referrer
+    kind: has_many
+    via: host
+  - from: Site
+    to: Geo
+    kind: has_many
+    via: host
+  - from: Site
+    to: Video
+    kind: has_many
+    via: video@host
+  - from: Site
+    to: Query
+    kind: has_many
+    via: host
+  - from: RecurringQuery
+    to: Query
+    kind: has_many
+    via: query_id
+  - from: Query
+    to: DataLabRow
+    kind: has_many
+    via: query_id
+  - from: Site
+    to: Experiment
+    kind: has_many
+    via: host
+  - from: Experiment
+    to: Variant
+    kind: has_many
+    via: experiment
+  - from: Site
+    to: ConversionEvent
+    kind: has_many
+    via: host
+  - from: ConversionEvent
+    to: Page
+    kind: has_many
+    via: path
+  - from: Page
+    to: CustomMetric
+    kind: has_many
+    via: metrics
+registries:
+  historical_metrics:
+    page: [page_views, page_uniques, page_views_loyal, page_views_quality, page_avg_time, page_total_time, page_avg_scroll, page_scroll_starts]
+    video: [video_plays, video_loads, video_play_rate, video_avg_time]
+  historical_dimensions:
+    page: [path, page_path, internal_path, title, author, section, sponsor, subdomain, pagetype, contenttype, publish_date, referrer, canonical_referrer, referrer_type, country, region, city, device, os, distribution, site_experience, subscriber, visit_frequency, utm_source, utm_medium, utm_campaign, utm_content, utm_term, scroll_hist, page_load_hist, pagewidth_hist, time_hist]
+    video: [video_path, video_title, play_state]
+    time: [client_minute, client_hour, client_day, tz_minute, tz_hour, tz_day, tz_month, utc_minute, utc_hour, utc_day]
+  platform_codes:
+    description: >-
+      Single-letter keys in the platform / platform_engaged maps of PageStats.
+      The docs publish the keys (a, e, d, g, f, i, m, r, t) without a legend, so
+      no expansion is recorded here rather than guessing one.
+    keys: [a, e, d, g, f, i, m, r, t]
+gaps:
+  - >-
+    No id-prefix scheme: query_id is a bare UUID and every other object is
+    addressed by natural key (host, path, video_path).
+  - >-
+    No write operations, so no create/update/delete lifecycle exists in the
+    model.
+  - >-
+    Headline Testing responses are described in prose without a field-level
+    schema, so the Experiment/Variant entities are named but not fully populated.

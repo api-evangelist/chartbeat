@@ -1,0 +1,123 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  docs.chartbeat.com API guides (real-time, historical, headline testing,
+  conversion, data lab), chartbeat.com/privacy/, chartbeat.com/apiterms/, and
+  the repo's authentication/, conventions/, rate-limits/ and well-known/
+  artifacts. No OpenAPI exists to derive from.
+standards:
+  - id: openapi
+    conforms: false
+    evidence: >-
+      No OpenAPI/Swagger document is served on any Chartbeat host. Probed
+      api.chartbeat.com and dashapi.chartbeat.com (/openapi.json, /openapi.yaml,
+      /swagger.json, /v1/openapi.json, /api-docs, /docs, /redoc — all 503 behind
+      the WAF) and docs.chartbeat.com (404). Docs are prose + tables only.
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      No event, streaming or webhook surface is published, so there is nothing
+      an AsyncAPI could describe. "Push Alerts" in the docs is SDK-side tracking
+      of push-notification referrers, not an outbound event delivery contract.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      Only a static account API key (X-CB-AK header, legacy apikey query param).
+      No authorization server, no token endpoint, no scopes.
+  - id: oidc
+    conforms: false
+    evidence: >-
+      /.well-known/openid-configuration returns 503 on api.chartbeat.com and 404
+      on chartbeat.com. SSO is an Enterprise dashboard feature, not an API auth
+      surface.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      No application/problem+json envelope is documented. Errors surface as bare
+      HTTP status codes; no error-code reference is published.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: >-
+      /.well-known/security.txt returns 503 (api.chartbeat.com), 404
+      (chartbeat.com) and 307 (docs.chartbeat.com). See
+      well-known/chartbeat-well-known.yml.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: >-
+      No deprecation policy and no Sunset/Deprecation header support documented.
+      See lifecycle/chartbeat-lifecycle.yml.
+  - id: rfc8615-well-known
+    conforms: false
+    evidence: No /.well-known/ document returned 200 on any Chartbeat host.
+  - id: a2a-agent-card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json probed on
+      chartbeat.com (404), api.chartbeat.com (503), dashapi.chartbeat.com (503)
+      and docs.chartbeat.com (307). No agent card is served.
+  - id: mcp
+    conforms: false
+    evidence: >-
+      No first-party MCP server. mcp.chartbeat.com does not resolve;
+      chartbeat.com/mcp is 404; api.chartbeat.com/mcp is 503 (WAF).
+  - id: llms-txt
+    conforms: true
+    evidence: >-
+      https://docs.chartbeat.com/cbp/llms.txt returns 200 with a full link index,
+      and every docs page is served as Markdown by appending .md — a genuine
+      agent-readable documentation surface. Saved at llms/chartbeat-llms.txt.
+  - id: rest
+    conforms: true
+    evidence: >-
+      HTTPS GET, JSON (and CSV/gzip on the Data Lab and Advanced Queries
+      surfaces), resource-style URL paths with a version segment.
+  - id: uri-path-versioning
+    conforms: true
+    evidence: >-
+      Version carried in the path per endpoint — live/toppages/v3/,
+      live/quickstats/v4/, live/top_geo/v1/, query/v2/, mab/htapi/v1/,
+      milkyway_dashboard/v1/.
+  - id: idempotency-keys
+    conforms: false
+    evidence: >-
+      No idempotency key header or documented idempotent-write contract. Every
+      published operation is a read, so there is no unsafe retry to protect.
+      See conventions/chartbeat-conventions.yml.
+  - id: cursor-pagination
+    conforms: false
+    evidence: >-
+      Result sets are bounded with a limit= row cap (recommended <= 10,000);
+      there is no cursor, offset or link-header paging.
+  - id: rate-limit-headers
+    conforms: true
+    evidence: >-
+      X-RateLimit-Limit and X-RateLimit-Remaining are documented as present on
+      every Real-Time API response. See rate-limits/chartbeat-rate-limits.yml.
+  - id: async-job-polling
+    conforms: true
+    evidence: >-
+      Advanced Queries implements submit -> status -> fetch with a documented
+      state machine (submitted, running, completed, downloaded, deleted) keyed by
+      query_id; recurring queries add runs/cancel.
+  - id: gdpr
+    conforms: true
+    evidence: >-
+      GDPR is named in Chartbeat's own privacy policy at
+      https://chartbeat.com/privacy/ (data-subject rights, privacy@chartbeat.com
+      contact). Self-asserted in policy text; no certification evidence.
+  - id: ccpa
+    conforms: true
+    evidence: >-
+      CCPA is named in https://chartbeat.com/privacy/.
+  - id: soc2
+    conforms: unknown
+    evidence: >-
+      A Vanta trust center exists at https://trust.chartbeat.com/ (HTTP 200) but
+      renders client-side and its data API rejects anonymous requests, so no
+      certification name could be read. Recorded as unknown rather than false.
+      See security/chartbeat-trust-center.yml.
+compliance_published: false
+compliance_note: >-
+  No Compliance pointer is emitted for this provider. GDPR/CCPA appear only as
+  privacy-policy prose, and the trust center's certification list is not
+  publicly readable — that is not a published compliance program we can evidence.

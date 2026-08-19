@@ -1,0 +1,166 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: >-
+  https://docs.chartbeat.com/cbp/api (Real-Time, Historical, Headline Testing,
+  Conversion and Data Lab guides) plus the endpoint list published on
+  https://chartbeat.com/docs/api/explore/
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: probed
+search_result:
+  official_hosted_server: none
+  official_stdio_package: none
+  probes:
+    - url: https://mcp.chartbeat.com/
+      method: GET
+      status: 0
+      note: host does not resolve (DNS failure)
+    - url: https://chartbeat.com/mcp
+      method: GET
+      status: 404
+    - url: https://api.chartbeat.com/mcp
+      method: GET
+      status: 503
+      note: >-
+        api.chartbeat.com returns 503 to every unauthenticated path, including
+        paths that certainly do not exist, so this is a WAF response and NOT
+        evidence of an MCP endpoint. Not treated as a hit.
+  finding: >-
+    Chartbeat publishes no MCP server, first-party or otherwise, and no npx/pip
+    stdio package. Its agent-facing investment is documentation-side: a served
+    llms.txt and a .md twin for every docs page. The tool list below is a
+    CANDIDATE derived by API Evangelist from Chartbeat's documented HTTP
+    endpoints so the surface is inventoried — Chartbeat does not ship it, and no
+    MCPServer pointer is wired in apis.yml as a result.
+server:
+  name: chartbeat
+  transport: null
+  url: null
+authentication:
+  scheme: api-key
+  header: X-CB-AK
+  ref: authentication/chartbeat-authentication.yml
+  note: >-
+    A single account key with no scopes, granting the full entitlement of the
+    account across every documented endpoint. Any MCP server built over this API
+    inherits an all-or-nothing credential.
+tools:
+  - name: get_top_pages
+    description: List the top pages on a site right now, ordered by concurrents.
+    source_endpoint: GET https://api.chartbeat.com/live/toppages/v3/
+    docs: https://docs.chartbeat.com/cbp/api/real-time-apis/traffic-data
+    parameters: [host, metrics, limit, section, author, exclude_people, sort_by, now_on, all_platforms, loyalty, types, jsonp]
+  - name: get_site_summary
+    description: Real-time summary statistics for a site.
+    source_endpoint: GET https://api.chartbeat.com/live/summary/v3/
+    docs: https://docs.chartbeat.com/cbp/api/real-time-apis/traffic-data
+    parameters: [host]
+  - name: get_referrers
+    description: Live referring domains driving traffic to a site.
+    source_endpoint: GET https://api.chartbeat.com/live/referrers/v3/
+    docs: https://docs.chartbeat.com/cbp/api/real-time-apis/traffic-data
+    parameters: [host, limit]
+  - name: get_top_geo
+    description: Live concurrents broken down by country, region and city.
+    source_endpoint: GET https://api.chartbeat.com/live/top_geo/v1/
+    docs: https://docs.chartbeat.com/cbp/api/real-time-apis/traffic-data
+    parameters: [host]
+  - name: get_quickstats
+    description: Headline live numbers for a site (concurrents and engagement).
+    source_endpoint: GET https://api.chartbeat.com/live/quickstats/v4/
+    docs: https://docs.chartbeat.com/cbp/api/real-time-apis/traffic-data
+    parameters: [host]
+  - name: get_recent_visitors
+    description: Most recent visitor activity on a site.
+    source_endpoint: GET https://api.chartbeat.com/live/recent/v3/
+    docs: https://chartbeat.com/docs/api/explore/
+    parameters: [host, limit]
+    note: Exposed by the API Explorer; not covered by the current docs guides.
+  - name: get_top_videos
+    description: Live video engagement per video asset (Video Engagement add-on).
+    source_endpoint: GET https://api.chartbeat.com/live/video/videos/v1/
+    docs: https://docs.chartbeat.com/cbp/api/real-time-apis/video-engagement-data
+    parameters: [host]
+    note: host must be prefixed with 'video@'.
+  - name: get_video_metrics
+    description: Live video metric rollups for a site.
+    source_endpoint: GET https://api.chartbeat.com/live/metrics/
+    docs: https://docs.chartbeat.com/cbp/api/real-time-apis/video-engagement-data
+    parameters: [host]
+  - name: submit_query
+    description: Submit a one-time Advanced Queries historical report; returns a query_id.
+    source_endpoint: GET https://api.chartbeat.com/query/v2/submit/
+    docs: https://docs.chartbeat.com/cbp/api/historical-api/one-time-queries
+    parameters: [host, endpoint, start, end, tz, limit, sort_column, sort_order, metrics, dimensions, filters]
+  - name: get_query_status
+    description: Poll the run status of a submitted query (submitted/running/completed/downloaded/deleted).
+    source_endpoint: GET https://api.chartbeat.com/query/v2/status/
+    docs: https://docs.chartbeat.com/cbp/api/historical-api/one-time-queries
+    parameters: [query_id]
+  - name: fetch_query_results
+    description: Download the results of a completed query as JSON or CSV.
+    source_endpoint: GET https://api.chartbeat.com/query/v2/fetch/
+    docs: https://docs.chartbeat.com/cbp/api/historical-api/one-time-queries
+    parameters: [query_id]
+  - name: submit_recurring_query
+    description: Create a recurring daily/weekly/monthly historical report.
+    source_endpoint: GET https://api.chartbeat.com/query/v2/recurring/submit/
+    docs: https://docs.chartbeat.com/cbp/api/historical-api/recurring-queries
+    parameters: [host, endpoint, date_range, tz, limit, sort_column, sort_order, metrics, dimensions, filters]
+  - name: get_recurring_query_status
+    description: Check the status of a recurring query.
+    source_endpoint: GET https://api.chartbeat.com/query/v2/recurring/status/
+    docs: https://docs.chartbeat.com/cbp/api/historical-api/recurring-queries
+    parameters: [query_id]
+  - name: list_recurring_query_runs
+    description: List the runs generated by a recurring query.
+    source_endpoint: GET https://api.chartbeat.com/query/v2/recurring/runs/
+    docs: https://docs.chartbeat.com/cbp/api/historical-api/recurring-queries
+    parameters: [query_id]
+  - name: fetch_recurring_query_results
+    description: Download the results of a recurring query run.
+    source_endpoint: GET https://api.chartbeat.com/query/v2/recurring/fetch/
+    docs: https://docs.chartbeat.com/cbp/api/historical-api/recurring-queries
+    parameters: [query_id]
+  - name: cancel_recurring_query
+    description: Cancel a recurring query so it stops generating runs.
+    source_endpoint: GET https://api.chartbeat.com/query/v2/recurring/cancel/
+    docs: https://docs.chartbeat.com/cbp/api/historical-api/recurring-queries
+    parameters: [query_id]
+  - name: get_headline_test_raw_data
+    description: Raw variant-level headline testing data over a time range.
+    source_endpoint: GET https://api.chartbeat.com/mab/htapi/v1/experiments/raw_data/
+    docs: https://docs.chartbeat.com/cbp/api/headline-testing-api/raw-data
+    parameters: [host, start, end, tz, status]
+  - name: get_headline_test_summary
+    description: Summary report of completed headline tests.
+    source_endpoint: GET https://api.chartbeat.com/mab/htapi/v1/experiments/summary_report/
+    docs: https://docs.chartbeat.com/cbp/api/headline-testing-api/summary-report
+    parameters: [host, start, end, tz]
+  - name: get_headline_test_variants
+    description: Variant-level report for completed headline tests.
+    source_endpoint: GET https://api.chartbeat.com/mab/htapi/v1/experiments/variant_report/
+    docs: https://docs.chartbeat.com/cbp/api/headline-testing-api/variant-report
+    parameters: [host, start, end, tz]
+  - name: get_top_articles_by_event
+    description: Top articles that drove a given conversion event, attributed per path.
+    source_endpoint: GET https://api.chartbeat.com/milkyway_dashboard/v1/top_articles_by_event_type
+    docs: https://docs.chartbeat.com/cbp/api/conversion-api/top-articles
+    parameters: [host, start, end, tz, limit, sort_event_type]
+  - name: get_data_lab_export
+    description: Export a gzipped CSV/JSON fact table of hourly-binned audience data.
+    source_endpoint: GET https://dashapi.chartbeat.com/datalab_api/get_data
+    docs: https://docs.chartbeat.com/cbp/api/data-lab-api/getting-started-with-data-lab-api
+    parameters: [host, start, end, tz, columns, serialization]
+crosswalk:
+  emitted: false
+  reason: >-
+    A tool crosswalk binds MCP tools to OpenAPI operationIds. Chartbeat publishes
+    neither an OpenAPI nor a GraphQL surface, so there are no operationIds to
+    bind to and no divergence to record. The source_endpoint on each tool above
+    carries the binding instead.

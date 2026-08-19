@@ -1,0 +1,43 @@
+generated: '2026-08-13'
+method: probed
+probe: true
+url: https://trust.chartbeat.com/
+platform: Vanta Trust Center
+certifications: []
+certifications_readable: false
+evidence:
+  - source: https://trust.chartbeat.com/
+    http_status: 200
+    content_type: text/html
+    signals:
+      - '<title>Chartbeat Trust Center</title>'
+      - 'canonical: https://trust.chartbeat.com'
+      - 'served by assets.vanta.com (Vanta trust-report bundle)'
+      - 'data-slugid: lb7r37f2uhw2d0yatm89q4'
+  - source: https://trust.chartbeat.com/graphql
+    http_status: 400
+    note: >-
+      The trust center renders entirely client-side from a signed GraphQL call.
+      Anonymous POSTs are rejected with "Missing `signature` or `signedAt`", so
+      the certification list, sub-processor list and document set are NOT
+      machine-readable without a browser session.
+notes:
+  - >-
+    Chartbeat DOES operate a trust center at trust.chartbeat.com — the host
+    resolves, returns 200 and is a genuine Vanta-hosted trust report page. That
+    is the verified finding recorded here.
+  - >-
+    NO named certification (SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP) could be
+    read from any public Chartbeat surface. The trust center is JS-rendered and
+    its data API requires a signed request; chartbeat.com/security/,
+    /security-policy/ and /gdpr/ all return 404. certifications is therefore an
+    honest empty list, not an assertion that Chartbeat holds none.
+  - >-
+    Because no certification could be evidenced, this file deliberately does NOT
+    carry a Compliance claim. Only GDPR and CCPA are named in Chartbeat's own
+    text, and only in the privacy policy — see conformance/.
+related:
+  privacy_policy: https://chartbeat.com/privacy/
+  privacy_contact: privacy@chartbeat.com
+  api_terms: https://chartbeat.com/apiterms/
+  vulnerability_disclosure: none-found

@@ -1,20 +1,59 @@
-generated: '2026-07-18'
-method: searched
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of every apis.yml baseURL host, the docs host and the marketing host
 note: >-
-  No /.well-known/ discovery documents were served. The API host
-  (api.chartbeat.com) returns 503 to unauthenticated well-known probes (WAF),
-  and the marketing/docs hosts return 404. No 200 documents to index.
+  RECORDED ABSENCE. No /.well-known/ discovery document was served with a 200 by
+  any Chartbeat host. api.chartbeat.com and dashapi.chartbeat.com answer 503 to
+  every unauthenticated request — including paths that certainly do not exist —
+  so those are WAF responses, not per-path 404s. chartbeat.com returns a 404 HTML
+  page and docs.chartbeat.com 307-redirects every /.well-known/* path into its
+  docs router. Because nothing returned a real document, NO WellKnown or
+  SecurityTxt pointer is wired in apis.yml; the previous round's WellKnown
+  pointer has been removed, since this file documents an absence and must not be
+  scored as a presence.
+documents_found: 0
 hosts:
   - host: https://api.chartbeat.com
+    behaviour: WAF returns 503 to all unauthenticated paths
     documents:
       - {path: /.well-known/security.txt, status: 503}
       - {path: /.well-known/openid-configuration, status: 503}
       - {path: /.well-known/oauth-authorization-server, status: 503}
       - {path: /.well-known/api-catalog, status: 503}
+      - {path: /.well-known/ai-plugin.json, status: 503}
+      - {path: /.well-known/agent-card.json, status: 503}
+      - {path: /.well-known/agent.json, status: 503}
+  - host: https://dashapi.chartbeat.com
+    behaviour: WAF returns 503 to all unauthenticated paths
+    documents:
+      - {path: /.well-known/security.txt, status: 503}
+      - {path: /.well-known/agent-card.json, status: 503}
+      - {path: /.well-known/agent.json, status: 503}
+      - {path: /.well-known/api-catalog, status: 503}
   - host: https://chartbeat.com
+    behaviour: WordPress 404 page
     documents:
       - {path: /.well-known/security.txt, status: 404}
       - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
   - host: https://docs.chartbeat.com
+    behaviour: 307 redirect into the docs router for every /.well-known/* path
     documents:
       - {path: /.well-known/security.txt, status: 307}
+      - {path: /.well-known/agent-card.json, status: 307}
+      - {path: /.well-known/agent.json, status: 307}
+      - {path: /.well-known/openid-configuration, status: 307}
+      - {path: /.well-known/api-catalog, status: 307}
+      - {path: /.well-known/ai-plugin.json, status: 307}
+agent_readable_surface:
+  note: >-
+    Chartbeat serves nothing at /.well-known/, but it DOES serve an agent-readable
+    documentation surface at a non-well-known path — llms.txt plus a .md twin for
+    every docs page.
+  llms_txt: https://docs.chartbeat.com/cbp/llms.txt
+  llms_txt_status: 200
+  markdown_twins: 'append .md to any docs.chartbeat.com/cbp/* URL'

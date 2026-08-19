@@ -1,0 +1,136 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.chartbeat.com/cbp/tracking
+docs: https://docs.chartbeat.com/cbp
+summary: >-
+  Chartbeat's client-side surface is a set of first-party browser libraries the
+  customer loads on their own pages. They are not a UI element library — they are
+  data-collection loaders plus one library (mab.js) that actively rewrites page
+  content, and one on-page overlay (the Heads Up Display). Recorded here because
+  they are the only embeddable, customer-installed Chartbeat code, and they are
+  distinct from the SDKs catalogued in packages/.
+distribution:
+  registry: cdn
+  note: >-
+    All browser libraries are loaded by script tag from Chartbeat's own CDN with
+    unpinned, floating filenames — there is no version in any documented URL and
+    no package-registry entry, so a consumer cannot tell which build they are
+    running. Version and published date are therefore unrecordable for every
+    entry below.
+families:
+  - family: Core tracking
+    components:
+      - name: chartbeat.js
+        kind: loader
+        purpose: >-
+          The standard pageview/engagement tracking snippet for websites. Reports
+          engaged time, scroll, referrer and page metadata.
+        configuration_object: _sf_async_config
+        docs: https://docs.chartbeat.com/cbp/tracking/standard-websites/our-javascript
+        config_docs: https://docs.chartbeat.com/cbp/tracking/standard-websites/configuration-variables
+        version: null
+        published: null
+      - name: virtualPage()
+        kind: api-method
+        purpose: >-
+          Single-page-app hook for reporting a virtual page change to the core
+          tracker.
+        docs: https://docs.chartbeat.com/cbp/tracking/standard-websites/single-page-apps
+        version: null
+        published: null
+      - name: _cbq
+        kind: queue-object
+        purpose: >-
+          Push queue used to report Custom Metrics (key/value) alongside a
+          pageview; the values surface only through the Top Pages API.
+        docs: https://docs.chartbeat.com/cbp/api/real-time-apis/traffic-data
+        version: null
+        published: null
+      - name: Chartbeat AMP component
+        kind: amp-analytics-vendor
+        purpose: >-
+          Accelerated Mobile Pages integration via the AMP analytics vendor
+          configuration rather than a script tag.
+        docs: https://docs.chartbeat.com/cbp/tracking/google-amp/amp-code
+        config_docs: https://docs.chartbeat.com/cbp/tracking/google-amp/amp-configuration-variables
+        version: null
+        published: null
+  - family: Headline and Image Testing
+    add_on: true
+    components:
+      - name: chartbeat_mab.js
+        kind: content-rewriting
+        purpose: >-
+          Multi-armed-bandit test runner. Swaps headline text and (with the Image
+          Testing add-on) images on the homepage in the visitor's browser, then
+          reports variant performance. The only Chartbeat library that mutates
+          the page.
+        docs: https://docs.chartbeat.com/cbp/feature-integrations/testing/homepage-testing-code
+        specifications: https://docs.chartbeat.com/cbp/feature-integrations/testing/mabjs-specifications
+        operational_notes:
+          - >-
+            Chartbeat publishes a dedicated "Flicker & Flicker Control" guide
+            because the swap can visibly repaint on sites optimised for fast
+            first paint.
+          - https://docs.chartbeat.com/cbp/feature-integrations/testing/flicker-and-flicker-control
+          - >-
+            Image markup compatibility is constrained; Chartbeat publishes a
+            compatibility guide.
+          - https://docs.chartbeat.com/cbp/feature-integrations/testing/image-compatibility
+        backing_api: Headline Testing API (https://api.chartbeat.com/mab/htapi/v1/)
+        version: null
+        published: null
+  - family: Video Engagement
+    add_on: true
+    components:
+      - name: chartbeat_video.js
+        kind: loader
+        purpose: >-
+          Video engagement tracking for web players; powers the real-time video
+          dashboard and the live/video/videos/v1/ endpoint.
+        docs: https://docs.chartbeat.com/cbp/feature-integrations/video-engagement/adding-videojs-to-your-site
+        config_docs: https://docs.chartbeat.com/cbp/feature-integrations/video-engagement/video-configuration-variables
+        version: null
+        published: null
+      - name: Custom Player Integration SDK
+        kind: adapter-sdk
+        purpose: >-
+          Manual bridge for players with no plug-and-play integration; the
+          escape hatch behind the supported-OVP list.
+        docs: https://docs.chartbeat.com/cbp/feature-integrations/video-engagement/custom-player-integration-sdk
+        supported_platforms_docs: https://docs.chartbeat.com/cbp/feature-integrations/video-engagement/supported-ovp-integrations
+        version: null
+        published: null
+  - family: Conversion
+    add_on: true
+    components:
+      - name: subscriptions.js
+        kind: loader
+        purpose: >-
+          Conversion-flow tracking (paywall, registration, subscription events);
+          feeds the Conversion API's top-articles attribution.
+        docs: https://docs.chartbeat.com/cbp/feature-integrations/conversion/adding-subscriptions.js-to-your-site
+        events_docs: https://docs.chartbeat.com/cbp/feature-integrations/conversion/conversion-events
+        backing_api: Conversion API (https://api.chartbeat.com/milkyway_dashboard/v1/)
+        version: null
+        published: null
+hosted_surfaces:
+  - name: Heads Up Display
+    kind: on-page-overlay
+    purpose: >-
+      Chartbeat's engagement overlay rendered on top of the customer's own live
+      site for logged-in Chartbeat users. Listed on the pricing page as the
+      "on-page digital overlay with engagement metrics" included in every tier.
+    source: https://chartbeat.com/product/chartbeat-pricing/
+    status_component: 'Chartbeat Publishing - Heads Up Display'
+  - name: Chartbeat API Explorer
+    kind: hosted-console
+    url: https://chartbeat.com/docs/api/explore/
+    ref: sandbox/chartbeat-sandbox.yml
+not_components:
+  - >-
+    The iOS, Android and React Native SDKs are native mobile tracking libraries
+    and are catalogued in packages/chartbeat-packages.yml, not here.
+  - >-
+    Chartbeat ships no embeddable dashboard, no web-component element library and
+    no hosted checkout/auth widget.

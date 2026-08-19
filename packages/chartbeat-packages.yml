@@ -1,47 +1,141 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: searched
-source: docs.chartbeat.com mobile SDK docs + npm/CocoaPods/JitPack registries
+source: >-
+  docs.chartbeat.com mobile SDK docs plus live registry metadata from
+  registry.npmjs.org, trunk.cocoapods.org, jitpack.io, api.wordpress.org and the
+  chartbeat-labs GitHub org.
 note: >-
-  Chartbeat's first-party client libraries are its mobile/analytics tracking
-  SDKs (client-side data collection), not REST API client libraries. Chartbeat
+  Chartbeat's first-party client libraries are its mobile/analytics tracking SDKs
+  (client-side data collection), not REST API client libraries. Chartbeat
   publishes no official server-side SDK for the Real-Time / Historical / Headline
-  Testing / Conversion / Data Lab REST APIs (those are plain HTTPS + X-CB-AK).
+  Testing / Conversion / Data Lab REST APIs — those are plain HTTPS + X-CB-AK.
+  Browser-side loaders (chartbeat.js, chartbeat_mab.js, chartbeat_video.js,
+  subscriptions.js) are CDN-distributed with no registry entry and are catalogued
+  in components/chartbeat-components.yml.
 packages:
   - language: swift
     registry: cocoapods
     name: Chartbeat
     version: 1.5.8
+    published: '2024-09-04'
     url: https://cocoapods.org/pods/Chartbeat
     install: "pod 'Chartbeat'"
     kind: mobile-tracking-sdk
     platform: iOS
+    docs: https://docs.chartbeat.com/cbp/tracking/mobile-app-sdks/ios-sdk
     official: true
+    source_repo: https://github.com/chartbeat-labs/chartbeat-ios-sdk
+    currency_note: >-
+      DIVERGENCE: the CocoaPods trunk podspec is stale. Latest published pod is
+      1.5.8 (2024-09-04, 46 versions total), while the source repo
+      chartbeat-labs/chartbeat-ios-sdk carries tags through 1.5.19 committed
+      2026-07-16. A CocoaPods consumer is nearly two years and eleven point
+      releases behind the code Chartbeat is actually shipping.
+  - language: objective-c
+    registry: github
+    name: chartbeat-labs/chartbeat-ios-sdk
+    version: 1.5.19
+    published: '2026-07-16'
+    url: https://github.com/chartbeat-labs/chartbeat-ios-sdk
+    install: null
+    kind: mobile-tracking-sdk
+    platform: iOS
+    official: true
+    currency_note: >-
+      Read from the tag 1.5.19 commit date via the GitHub API. This is the live
+      iOS SDK; it is ahead of the CocoaPods release above.
   - language: java
     registry: jitpack
     name: com.github.chartbeat:android_sdk
-    version: 1.8.0
+    version: 1.8.5
+    published: null
     url: https://jitpack.io/#chartbeat/android_sdk
-    install: "implementation 'com.github.chartbeat:android_sdk:1.8.0'"
+    install: "implementation 'com.github.chartbeat:android_sdk:1.8.5'"
     kind: mobile-tracking-sdk
     platform: Android
     docs: https://docs.chartbeat.com/cbp/tracking/mobile-app-sdks/android-sdk
     official: true
-  - language: javascript
-    registry: npm
-    name: chartbeat-react-native-sdk
-    version: 0.0.22
-    url: https://www.npmjs.com/package/chartbeat-react-native-sdk
-    install: npm install chartbeat-react-native-sdk
-    kind: mobile-tracking-sdk
-    platform: React Native
-    docs: https://docs.chartbeat.com/cbp/tracking/mobile-app-sdks/react-native-sdk
-    official: true
+    currency_note: >-
+      jitpack.io/api/builds/com.github.chartbeat/android_sdk/latestOk reports
+      1.8.5 (status ok, tag build). JitPack's build metadata returns a commit sha
+      and no release timestamp, and the backing repo github.com/chartbeat/android_sdk
+      is not readable through the GitHub API (404), so published is null —
+      checked, nothing dateable to record. Previous round recorded 1.8.0; 1.8.5
+      is the current resolvable tag.
   - language: javascript
     registry: npm
     name: chartbeat-react-native-bridge-sdk
     version: 1.0.6
+    published: '2026-07-16'
     url: https://www.npmjs.com/package/chartbeat-react-native-bridge-sdk
     install: npm install chartbeat-react-native-bridge-sdk
     kind: mobile-tracking-sdk
     platform: React Native
+    docs: https://docs.chartbeat.com/cbp/tracking/mobile-app-sdks/react-native-sdk
     official: true
+    currency_note: >-
+      Current. Published the same day as the iOS SDK's 1.5.19 tag, so the React
+      Native bridge is the actively maintained mobile path.
+  - language: javascript
+    registry: npm
+    name: chartbeat-react-native-sdk
+    version: 0.0.22
+    published: '2024-05-14'
+    url: https://www.npmjs.com/package/chartbeat-react-native-sdk
+    install: npm install chartbeat-react-native-sdk
+    kind: mobile-tracking-sdk
+    platform: React Native
+    official: true
+    currency_note: >-
+      Last published 2024-05-14 and still on a 0.0.x version line. Superseded in
+      practice by chartbeat-react-native-bridge-sdk, which the docs and the Push
+      Alerts guide reference for current work.
+  - language: php
+    registry: wordpress.org
+    name: chartbeat
+    version: 2.0.7
+    published: '2020-07-01'
+    url: https://wordpress.org/plugins/chartbeat/
+    install: Install "Chartbeat" from the WordPress plugin directory
+    kind: cms-plugin
+    platform: WordPress
+    official: true
+    source_repo: https://github.com/chartbeat-labs/wordpress
+    currency_note: >-
+      Author is the official "chartbeat" wordpress.org account, so this is
+      first-party. Last updated 2020-07-01 — over six years stale — while the
+      GitHub mirror chartbeat-labs/wordpress was last touched 2024-07-09. Read
+      from api.wordpress.org/plugins/info/1.0/chartbeat.json.
+third_party:
+  - language: javascript
+    registry: npm
+    name: chartbeat
+    version: 0.0.0
+    published: '2011-09-24'
+    url: https://www.npmjs.com/package/chartbeat
+    official: false
+    note: >-
+      NOT Chartbeat. A community Node wrapper published in 2011 by npm user
+      'agilbert' (repo alaingilbert/chartbeat), never released past 0.0.0.
+      Recorded so the name is not mistaken for a first-party SDK.
+  - language: javascript
+    registry: github
+    name: chartbeat-labs/jChartbeat
+    version: null
+    published: null
+    url: https://github.com/chartbeat-labs/jChartbeat
+    official: false
+    note: >-
+      jQuery plugin for the Chartbeat API published under the chartbeat-labs org
+      but unmaintained since 2018 and never released to a package registry.
+      Registry fields are null because there is no registry entry to query.
+summary:
+  official_count: 6
+  registries: [cocoapods, jitpack, npm, wordpress.org, github]
+  server_side_sdk: false
+  finding: >-
+    Every first-party package Chartbeat ships is a data-COLLECTION library. There
+    is no client library of any kind for the six read APIs it documents, in any
+    language, so consuming the API means hand-rolling HTTP. Of the six official
+    packages, three (CocoaPods pod, chartbeat-react-native-sdk, WordPress plugin)
+    have not had a release in over two years.

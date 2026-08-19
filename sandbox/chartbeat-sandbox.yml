@@ -1,0 +1,86 @@
+generated: '2026-08-13'
+method: searched
+source: https://chartbeat.com/docs/api/explore/
+docs: https://docs.chartbeat.com/cbp/api
+summary: >-
+  Chartbeat has no test-vs-live key separation, no sandbox account, and no
+  fixture/trigger tooling. What it does publish is a hosted, browser-based API
+  Explorer that ships with its own working demo API key, so a developer can
+  execute real requests against the live Real-Time and legacy Historical
+  endpoints without holding a Chartbeat account.
+console:
+  name: Chartbeat API Explorer
+  url: https://chartbeat.com/docs/api/explore/
+  hosted: true
+  type: interactive-request-builder
+  base_url: https://api.chartbeat.com/
+  inputs:
+    - name: Domain
+      param: host
+      description: Site ID (dashboard host) to query.
+    - name: API Key
+      param: apikey / X-CB-AK
+      description: >-
+        The explorer pre-populates a demo key; account holders can paste their
+        own key instead.
+  behaviour: >-
+    Builds the request URL from the selected endpoint plus its parameters, issues
+    it live, and renders the raw JSON response alongside the generated request
+    URL.
+  endpoints_offered:
+    - live/toppages/v3/
+    - live/summary/v3/
+    - live/referrers/v3/
+    - live/top_geo/v1/
+    - live/quickstats/v4/
+    - live/recent/v3/
+    - historical/traffic/series/
+    - historical/traffic/stats/
+    - historical/engagement/series/
+    - historical/engagement/stats/
+    - historical/social/series/
+    - historical/social/stats/
+  note: >-
+    The six historical/* paths are only exposed here — they are a legacy
+    Historical API surface that the current docs.chartbeat.com guides do not
+    cover (those document the newer /query/v2/ Advanced Queries job model).
+published_credentials:
+  - kind: demo-api-key
+    parameter: apikey
+    value: 317a25eccba186e0f6b558f45214c0e7
+    scope: '["all"]'
+    accesses: any
+    source: https://chartbeat.com/docs/api/explore/
+    verbatim: true
+    note: >-
+      Published verbatim by Chartbeat on its own public API Explorer page as the
+      pre-filled default key. Captured as-published; not generated, not guessed,
+      and not a credential belonging to API Evangelist.
+test_vs_live:
+  separated: false
+  key_prefixes: []
+  note: >-
+    A single account API key (X-CB-AK) addresses production data. There is no
+    test mode, no test-key prefix, and no way to write data through the API
+    (every documented operation is a read), so there is no destructive action to
+    sandbox.
+test_data:
+  magic_values: []
+  test_clocks: false
+  fixtures: false
+  note: >-
+    No magic test identifiers, no time simulation, and no fixture/trigger
+    tooling are published. The only "test" affordance is the explorer's demo key
+    above.
+tracking_side_testing:
+  note: >-
+    For the data-collection side (chartbeat.js, the mobile SDKs, mab.js,
+    subscriptions.js, video.js), Chartbeat publishes per-integration QA guides
+    rather than a sandbox — these verify a live integration is firing correctly.
+  qa_guides:
+    - https://docs.chartbeat.com/cbp/tracking/standard-websites/qa-web-integration
+    - https://docs.chartbeat.com/cbp/tracking/google-amp/qa-amp-integration
+    - https://docs.chartbeat.com/cbp/tracking/mobile-app-sdks/qa-mobile-sdk-integration
+    - https://docs.chartbeat.com/cbp/feature-integrations/testing/qa-homepage-testing-integration
+    - https://docs.chartbeat.com/cbp/feature-integrations/video-engagement/integration-qa-steps-video-tracking
+    - https://docs.chartbeat.com/cbp/feature-integrations/conversion/integration-qa-steps-conversion

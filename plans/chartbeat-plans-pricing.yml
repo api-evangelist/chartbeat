@@ -1,0 +1,89 @@
+generated: '2026-08-13'
+method: searched
+source: https://chartbeat.com/product/chartbeat-pricing/
+currency: USD
+billing_period: annual-contract
+pricing_model: >-
+  Scaled on website and native-app pageviews. No list prices are published for
+  any tier; every tier is quoted through "Talk to Sales". Seats are unlimited on
+  all published tiers.
+public_prices: false
+plan_count: 4
+plans:
+  - name: Essentials
+    price: null
+    currency: USD
+    billing_period: null
+    quota: null
+    overage: null
+    positioning: The tools you need for a data-informed content strategy
+    includes:
+      - Real-time content performance tracking (website and native apps)
+      - Historical data up to 13 months
+      - On-page digital overlay with engagement metrics (Heads Up Display)
+      - CSV export reports
+      - Real-time video dashboard
+      - Dedicated Account Manager
+      - Unlimited seats
+    note: Contact-sales only; no published price.
+  - name: Plus
+    price: null
+    currency: USD
+    billing_period: null
+    quota: null
+    overage: null
+    includes:
+      - Everything in Essentials
+      - One Performance Suite of the customer's choice (Reader Experience, Testing, Benchmarking, or Analytics Pro)
+    note: Contact-sales only; no published price.
+  - name: Premium
+    price: null
+    currency: USD
+    billing_period: null
+    quota: null
+    overage: null
+    includes:
+      - Everything in Essentials
+      - Three Performance Suites of the customer's choice
+    note: Contact-sales only; no published price.
+  - name: Enterprise
+    price: null
+    currency: USD
+    billing_period: null
+    quota: null
+    overage: null
+    includes:
+      - Everything in Essentials
+      - All four Performance Suites (Reader Experience, Testing, Benchmarking, Analytics Pro)
+      - Single Sign-On (SSO)
+    note: Contact-sales only; no published price.
+performance_suites:
+  - Reader Experience
+  - Testing
+  - Benchmarking
+  - Analytics Pro
+api_plan_gating:
+  - api: Real-Time API (traffic data)
+    availability: >-
+      Documented as accessible to all customers regardless of plan.
+    source: https://docs.chartbeat.com/cbp/api/real-time-apis/traffic-data
+  - api: Real-Time API (video engagement data)
+    availability: Requires the Video Engagement add-on.
+    source: https://docs.chartbeat.com/cbp/api/real-time-apis/video-engagement-data
+  - api: Historical API (Advanced Queries)
+    availability: Premium feature (Advanced Queries).
+    source: https://docs.chartbeat.com/cbp/api/historical-api/getting-started-with-our-historical-api
+  - api: Headline Testing API
+    availability: Requires the Headline/Image Testing add-on (Testing Performance Suite).
+    source: https://docs.chartbeat.com/cbp/feature-integrations/testing
+  - api: Conversion API
+    availability: Requires the Conversion add-on.
+    source: https://docs.chartbeat.com/cbp/feature-integrations/conversion
+notes:
+  - >-
+    No self-serve checkout, no published per-seat or per-pageview rate card, and
+    no free tier is advertised on the pricing page. The commercial surface is
+    entirely sales-mediated.
+  - >-
+    API access itself is not sold as a separate SKU; it follows the dashboard
+    entitlements of the plan and add-ons above.
