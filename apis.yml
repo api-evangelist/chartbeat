@@ -31,7 +31,7 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-13'
 image: https://chartbeat.com/wp-content/uploads/2024/04/Chartbeat-logo-Navy-300ppi@2x.png
