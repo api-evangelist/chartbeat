@@ -83,6 +83,10 @@ apis:
   tags:
   - Real-Time
   - Traffic
+  - Audiences
+  tags_raw:
+  - Real-Time
+  - Traffic
   - Audience
   properties:
   - type: Documentation
