@@ -50,6 +50,9 @@ specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-13'
 image: https://chartbeat.com/wp-content/uploads/2024/04/Chartbeat-logo-Navy-300ppi@2x.png
+x-docs-platform: gitbook
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-09-21
 tags:
 - Company
 - Software-as-a-Service
