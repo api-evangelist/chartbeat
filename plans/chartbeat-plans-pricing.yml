@@ -87,3 +87,33 @@ notes:
   - >-
     API access itself is not sold as a separate SKU; it follows the dashboard
     entitlements of the plan and add-ons above.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Essentials
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Plus
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Premium
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
