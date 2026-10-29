@@ -64,6 +64,121 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Chartbeat is a company surfaced as a portfolio company of threshold-ventures, uncork-capital and added to the API Evangelist network as a stub for enrichment. Sector: saas. This profile is a lead awaiting the enrichment pipeline.
+Chartbeat is a real-time content analytics and audience-engagement platform built for digital publishers, media brands, and editorial teams. It measures how audiences read, watch, and engage with content the moment it is published, reporting live traffic, engaged time, loyalty, video engagement, and headline performance. Beyond its dashboards, Chartbeat exposes public HTTP APIs: a Real-Time API for live traffic and video data updated every three seconds, a Historical (Advanced Queries) API for summary traffic reporting, and Headline Testing, Conversion, and Data Lab APIs, plus JavaScript, iOS, Android, and React Native tracking SDKs for data collection. Authentication is via an account API key sent in the X-CB-AK header.
 
-Backed by: threshold-ventures, uncork-capital — https://chartbeat.com/
+**Areas:** Company · Software-as-a-Service · Analytics · Content Analytics · Real-Time Analytics · Audience Engagement · Publishing · Media · Web Analytics · Video Analytics
+
+## Chartbeat on APIs.io
+
+Everything profiled for Chartbeat is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/chartbeat/](https://apis.io/providers/chartbeat/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [Chartbeat Real-Time API](https://apis.io/apis/chartbeat/chartbeat-real-time-api/) — Live audience and traffic data updated every three seconds — top pages, referrers, geographies, engaged time, loyalty, and live concurrent visitors — the…
+- [Chartbeat Historical API (Advanced Queries)](https://apis.io/apis/chartbeat/chartbeat-historical-api-advanced-queries/) — Summary historical traffic data for a site over custom date ranges, via an asynchronous submit / status / results job model. Supports one-time and recurring…
+- [Chartbeat Headline Testing API](https://apis.io/apis/chartbeat/chartbeat-headline-testing-api/) — Programmatic access to headline testing data — raw variant-level data, summary reports, and variant reports for headline tests run over a custom time range.
+- [Chartbeat Conversion API](https://apis.io/apis/chartbeat/chartbeat-conversion-api/) — Retrieve the top articles that drove a given conversion event for a specified host and date range, with counts attributed per path.
+- [Chartbeat Data Lab API](https://apis.io/apis/chartbeat/chartbeat-data-lab-api/) — Programmatic access to Chartbeat Data Lab datasets for deeper custom analysis of audience and content performance.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [chartbeat](https://apis.io/servers/chartbeat/chartbeat/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Chartbeat Authentication](https://apis.io/security/chartbeat/chartbeat-authentication/)
+- [Chartbeat Domain Security](https://apis.io/security/chartbeat/chartbeat-domain-security/)
+- [Chartbeat Trust Center](https://apis.io/security/chartbeat/chartbeat-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Chartbeat Plans Pricing](https://apis.io/plans/chartbeat/chartbeat-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Chartbeat Rate Limits](https://apis.io/rate-limits/chartbeat/chartbeat-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://chartbeat.com/)
+- [Documentation](https://docs.chartbeat.com/cbp)
+- [Getting started](https://docs.chartbeat.com/cbp/api/real-time-apis/getting-started-with-our-real-time-api)
+- [API reference](https://docs.chartbeat.com/cbp/api)
+- [Pricing](https://chartbeat.com/product/chartbeat-pricing/)
+- [Sign up](https://chartbeat.com/signin/)
+- [Support](https://help.chartbeat.com/)
+- [Blog](https://chartbeat.com/resources/)
+- [Trust centre](https://trust.chartbeat.com/)
+- [Terms of service](https://chartbeat.com/terms/)
+- [Privacy policy](https://chartbeat.com/privacy/)
+- [GitHub](https://github.com/chartbeat-labs)
+- [Status](https://status.chartbeat.com/)
+
+## API Evangelist rating
+
+**Kin Score 44.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 71.4 |
+| Access clarity | 76.3 |
+
+**Agent readiness 5.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/chartbeat/](https://apis.io/providers/chartbeat/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Chartbeat: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/chartbeat/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
